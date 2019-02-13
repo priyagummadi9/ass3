@@ -1,0 +1,32 @@
+---
+title: "ass4"
+author: "Priya"
+date: "2/12/2019"
+output: html_document
+---
+
+```{r}
+install.packages(rvest)
+library(rvest)
+install.packages(XML)
+library(XML)
+link<-read_html("http://www.csu.edu/")
+link1<-html_nodes(link,".the-mission-of-the-college-of-")
+html_text(link1,trim=TRUE)
+html_name(link)
+html_name(link1)
+html_attrs(link1)
+```
+
+
+
+```{r}
+pop<- read_html("http://www.worldometers.info/geography/alphabetical-list-of-countries/")
+
+pop1<-html_table(html_nodes(pop,"table")[[1]],fill=TRUE)
+pop2<- as.data.frame(pop1, header=T)
+pop2
+
+
+```
+

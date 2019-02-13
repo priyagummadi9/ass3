@@ -191,10 +191,76 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>films &lt;- read.csv2(file.path(&quot;/Users/priyagummadidala/Desktop/Film1.csv&quot;))
-str(films)</code></pre>
-<pre><code>## 'data.frame':    14 obs. of  1 variable:
-##  $ Year.Length.Title.Subject.Actor: Factor w/ 14 levels &quot;1966,103,A Man &amp; a Woman,Drama,Trintignant&quot;,..: 14 11 13 6 3 2 7 8 10 9 ...</code></pre>
+<pre class="r"><code>subjects &lt;- read.csv(&quot;Book3.csv&quot;,TRUE,&quot;,&quot;)</code></pre>
+<pre><code>## Warning in read.table(file = file, header = header, sep = sep, quote =
+## quote, : incomplete final line found by readTableHeader on 'Book3.csv'</code></pre>
+<pre class="r"><code>subjects</code></pre>
+<pre><code>##   exam_1 exam_2 exam_3 subjects
+## 1     80     75     90    maths
+## 2     33     80     75  science
+## 3     99     60     85  english
+## 4    100     99     99  physics</code></pre>
+<pre class="r"><code>city &lt;- read.csv(&quot;Book4.csv&quot;,TRUE,&quot;,&quot;)
+city</code></pre>
+<pre><code>##   City1 City2 City3
+## 1  1200  3600  1100
+## 2  1500  4200  1230
+## 3  4000  3500  1360
+## 4  8000  9200  3450
+## 5  3500  9300  2650
+## 6  8000  4100  1920</code></pre>
+<pre class="r"><code>sub1 &lt;- subjects[,3]
+sub1</code></pre>
+<pre><code>## [1] 90 75 85 99</code></pre>
+<pre class="r"><code>cit1 &lt;- city[,1]
+cit1</code></pre>
+<pre><code>## [1] 1200 1500 4000 8000 3500 8000</code></pre>
+<pre class="r"><code>count &lt;- 0
+total &lt;- 0
+#Using for loop and seq_along function to caluclate mean
+for (i in seq_along(sub1)) 
+{
+  total = total + sub1[i]
+  count&lt;-count+1
+}
+y = total / count
+print(y)</code></pre>
+<pre><code>## [1] 87.25</code></pre>
+<pre class="r"><code># Using functions to calculate mean 
+firstfn&lt;-function(sub1)
+{
+  count = 0
+  total = 0
+for (i in seq_along(sub1)) 
+  {
+  total = total + sub1[i]
+  count&lt;-count+1
+  }
+z = total / count
+print(z) 
+}
+c &lt;- c(sub1)
+firstfn(sub1)</code></pre>
+<pre><code>## [1] 87.25</code></pre>
+<pre class="r"><code># Using Lapply to find sum and mean
+pri &lt;- list(city)
+pri</code></pre>
+<pre><code>## [[1]]
+##   City1 City2 City3
+## 1  1200  3600  1100
+## 2  1500  4200  1230
+## 3  4000  3500  1360
+## 4  8000  9200  3450
+## 5  3500  9300  2650
+## 6  8000  4100  1920</code></pre>
+<pre class="r"><code>f &lt;- lapply(pri, firstfn)</code></pre>
+<pre><code>##      City1
+## 1 1966.667
+## 2 2310.000
+## 3 2953.333
+## 4 6883.333
+## 5 5150.000
+## 6 4673.333</code></pre>
 
 
 

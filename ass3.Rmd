@@ -1,58 +1,20 @@
 ---
 title: "Ass3"
 author: "Priya"
-date: "2/1/2019"
+date: "2/2/2019"
 output: html_document
 ---
 
-```{r}
-subjects <- read.csv("Book3.csv",TRUE,",")
-subjects
-city <- read.csv("Book4.csv",TRUE,",")
-city
-```
 
-```{r}
-sub1 <- subjects[,3]
-sub1
-cit1 <- city[,1]
-cit1
-```
 
-```{r}
-count <- 0
-total <- 0
-#Using for loop and seq_along function to caluclate mean
-for (i in seq_along(sub1)) 
-{
-  total = total + sub1[i]
-  count<-count+1
-}
-y = total / count
-print(y)
-```
+```{r cars}
+priya <- read.csv("pri.csv",TRUE,",")
+class(priya)
 
-```{r}
-# Using functions to calculate mean 
-firstfn<-function(sub1)
-{
-  count = 0
-  total = 0
-for (i in seq_along(sub1)) 
-  {
-  total = total + sub1[i]
-  count<-count+1
-  }
-z = total / count
-print(z) 
-}
-c <- c(sub1)
-firstfn(sub1)
-```
+arrayOne <- priya[,5]
+class(arrayOne)
 
-```{r}
-# Using Lapply to find sum and mean
-pri <- list(city)
-pri
-f <- lapply(pri, firstfn)
+len <- length(arrayOne)
+len 
+
 ```
