@@ -21,12 +21,30 @@ html_attrs(link1)
 
 
 ```{r}
-pop<- read_html("http://www.worldometers.info/geography/alphabetical-list-of-countries/")
+pop<- read_html("https://www.officeholidays.com/countries/usa/index.php")
 
-pop1<-html_table(html_nodes(pop,"table")[[1]],fill=TRUE)
+pop1<-html_table(html_nodes(pop,"td")[[1]])
 pop2<- as.data.frame(pop1, header=T)
 pop2
 
-
 ```
 
+
+
+
+```{r}
+
+
+install.packages(rvest)
+install.packages(XML)
+
+info<-("https://en.wikipedia.org/wiki/List_of_dangerous_snakes")
+info1<-read_html(info)
+info1
+info2<-info1%>% html_nodes("table") %>% .[[2]] %>% html_table(fill=TRUE)
+info2
+info3<-data.frame(info2)
+info3
+info4<-head(info3)
+info4
+```

@@ -1,0 +1,27 @@
+---
+title: "Priyaass5"
+author: "Priya"
+date: "2/17/2019"
+output: html_document
+---
+
+```{r}
+library(rvest)
+holidays<-("https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_date_of_death")
+a<-read_html(holidays)
+a1<-a %>%html_nodes("table") %>% .[1]%>% html_table(fill=TRUE)
+a_df<-data.frame(a1)
+a_df
+#changing the name of column
+names(a_df)[3]<-"dates"
+head(a_df)
+
+#formating the date and calc the difference
+date_diff=as.numeric((Sys.Date()-as.Date(a_df$dates,"%B %d, %Y"))/365) 
+
+#creating a new column in the dataframe
+num_of_years=floor(date_diff)
+a_df=cbind(a_df,num_of_years)
+print(a_df)
+
+```
