@@ -1,0 +1,32 @@
+---
+title: "Ass8"
+author: "Priya Gummadidala"
+date: "3/21/2019"
+output: html_document
+---
+
+
+
+```{r}
+urlLink<-read_html("https://coinmarketcap.com/currencies/bitcoin/historical-data/")
+urlLink<-urlLink%>%html_nodes("table") %>%.[1]%>% html_table(fill=TRUE)
+urlLink<-data.frame(urlLink)
+urlLink
+
+#clustering 
+par(mar=rep(0.2,4))
+clusters<-kmeans(urlLink[,c(3,4)],centers = 2)
+names(clusters)
+urlLink$cluster<-as.factor(clusters$cluster)
+
+plot(url$High,url$Low,col=urlLink$cluster,pch=19,cex=2)
+points(clusters$centers,col=1:2,pch=3,cex=3,lwd=3)
+
+```
+
+```{r}
+
+
+```
+
+
