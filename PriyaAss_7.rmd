@@ -1,0 +1,30 @@
+---
+title: "Ass7"
+author: "Priya Gummadidala"
+date: "3/10/2019"
+output: html_document
+---
+
+
+
+```{r}
+url<-read_html("https://coinmarketcap.com/currencies/bitcoin/historical-data/")
+url<-url%>%html_nodes("table") %>%.[1]%>% html_table(fill=TRUE)
+url<-data.frame(url)
+url
+
+ggplot(url,aes(x=Open.,y=Volume))+geom_point()+geom_smooth(method=lm)
+```
+
+```{r}
+url<-read_html("https://en.wikipedia.org/wiki/World_population")
+url<-url%>%html_nodes("table") %>%.[3]%>% html_table(fill=TRUE)
+Density.inhabitants.km2.<-as.numeric(url$Density.inhabitants.km2.)
+Population.millions.<-as.numeric(url$Population.millions.)
+url<-data.frame(url)
+url
+
+ggplot(url,aes(x=Population.millions.,y=Density.inhabitants.km2.))+geom_point()+geom_smooth(method=lm)
+```
+
+
