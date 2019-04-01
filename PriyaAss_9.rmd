@@ -1,0 +1,46 @@
+---
+title: "Ass8"
+author: "Priya Gummadidala"
+date: "3/21/2019"
+output: html_document
+---
+
+
+
+```{r}
+urlLink<-read_html("https://coinmarketcap.com/currencies/bitcoin/historical-data/")
+urlLink<-urlLink%>%html_nodes("table") %>%.[1]%>% html_table(fill=TRUE)
+urlLink<-data.frame(urlLink)
+urlLink
+
+#clustering 
+par(mar=rep(0.2,4))
+clusters<-kmeans(urlLink[,c(3,4)],centers = 2)
+names(clusters)
+urlLink$cluster<-as.factor(clusters$cluster)
+plot(urlLink$High,urlLink$Low,col=urlLink$cluster,pch=19,cex=2)
+points(clusters$centers,col=1:2,pch=3,cex=3,lwd=3)
+
+fit<-lm(Low~High,data=urlLink)
+coef(fit)
+summary(fit)
+
+urlLink$predicted<-predict(fit)
+urlLink$residuals<-residuals(fit)
+
+a<-ggplot(urlLink,aes(x=High,y=Low))
+a<-a+geom_smooth(method=lm,se=FALSE,color="lightgrey")
+a<-a+geom_segment(aes(xend=High,yend=predicted),alpha=0.2)
+a<-a+geom_point(aes(color=residuals))
+a<-a+scale_color_gradient2(low="blue",high="red")
+a<-a+guides(color=FALSE)
+a<-a+geom_point(aes(y=predicted),shape=1)
+a
+
+
+
+```
+
+
+
+
